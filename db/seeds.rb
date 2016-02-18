@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+MedicalBox.create!({id: 1, name:'123', user_id: 1})
+MedicalBox.create!({id: 2, name:'123456', user_id: 1})

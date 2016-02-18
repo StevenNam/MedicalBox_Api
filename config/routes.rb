@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :medical_boxes, only: [:index, :show]
+
+  resources :users do
+    resources :medical_boxes, only: [:index, :show]
+  end
+
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks],
   controllers: {
     :registrations => 'user/registrations'

@@ -1,4 +1,8 @@
-json.medical_boxes @medicalBoxes do |medicalBox|
-  json.name medicalBox.name
-  #json.user medicalBox.user
+if @medicalBoxes == nil then
+
+else
+  json.medical_boxes @medicalBoxes do |medicalBox|
+    json.id medicalBox.id
+    json.name medicalBox.name
+  end
 end

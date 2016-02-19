@@ -1,15 +1,10 @@
 Rails.application.routes.draw do
-  resources :medical_boxes, only: [:index, :show]
-
-  resources :users do
-    resources :medical_boxes, only: [:index, :show]
-  end
+  resources :medical_boxes, only: [:index, :show, :create]
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks],
   controllers: {
     :registrations => 'user/registrations'
   }
-
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

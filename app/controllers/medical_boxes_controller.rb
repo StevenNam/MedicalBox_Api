@@ -10,7 +10,16 @@ class MedicalBoxesController < ApplicationController
   end
 
   def create
-    @medicalBox = MedicalBox.create!( :name => params[:name], :user_id => current_user.id)
+    @medicalBox = MedicalBox.create!(
+      name: params[:name] ||= 'New Medical Box',
+      alert_time: params[:alert_time],
+      frequency: params[:frequency] ||= 'once',
+      user_id: current_user.id
+    )
+  end
+
+  def post_params
+    params.permit(:name)
   end
 
 end

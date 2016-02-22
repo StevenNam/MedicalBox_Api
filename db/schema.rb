@@ -17,10 +17,13 @@ ActiveRecord::Schema.define(version: 20160218160457) do
   enable_extension "plpgsql"
 
   create_table "medical_boxes", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       default: "New Medical Box", null: false
+    t.string   "alert_time",                             null: false
+    t.string   "frequency",  default: "once",            null: false
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean  "is_deleted", default: false,             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
   end
 
   create_table "users", force: :cascade do |t|

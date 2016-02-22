@@ -6,7 +6,7 @@ class MedicalBoxesController < ApplicationController
   end
 
   def show
-    @medicalBox = MedicalBox.find_by_id(params[:id])
+    @medicalBox = MedicalBox.find(params[:id])
   end
 
   def create
@@ -16,6 +16,17 @@ class MedicalBoxesController < ApplicationController
       frequency: params[:frequency] ||= 'once',
       user_id: current_user.id
     )
+  end
+
+  def update
+    temp = MedicalBox.find(params[:id])
+    temp.update!(
+      name: params[:name] ||= temp.name,
+      alert_time: params[:alert_time] ||= temp.alert_time,
+      frequency: params[:frequency] ||= temp.frequency
+    )
+
+    @medicalBox = MedicalBox.find(params[:id])
   end
 
   def post_params

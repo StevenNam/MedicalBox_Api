@@ -2,7 +2,7 @@ class MedicalBoxesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :create]
 
   def index
-    @medicalBoxes = MedicalBox.where(:user_id => current_user.id)
+    @medicalBoxes = MedicalBox.where(:user_id => current_user.id).order("id ASC")
   end
 
   def show

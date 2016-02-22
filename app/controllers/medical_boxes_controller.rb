@@ -2,7 +2,7 @@ class MedicalBoxesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :show, :create]
 
   def index
-    @medicalBoxes = MedicalBox.where(:user_id => current_user.id).order("id ASC")
+    @medicalBoxes = MedicalBox.where(user_id: current_user.id, is_deleted: false).order("id ASC")
   end
 
   def show
@@ -27,6 +27,13 @@ class MedicalBoxesController < ApplicationController
     )
 
     @medicalBox = MedicalBox.find(params[:id])
+  end
+
+  def destroy
+    temp = MedicalBox.find(params[:id])
+    temp.update!(
+      is_deleted: true
+    )
   end
 
   def post_params

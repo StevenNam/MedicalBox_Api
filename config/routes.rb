@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :medical_boxes, only: [:index, :show, :create, :update, :destroy]
+  resources :medical_boxes, only: [:index, :show, :create, :update, :destroy] do
+    post "/copy", to: "medical_boxes#copy"
+  end
 
   mount_devise_token_auth_for 'User', at: 'auth', skip: [:omniauth_callbacks],
   controllers: {

@@ -18,6 +18,17 @@ class MedicalBoxesController < ApplicationController
     )
   end
 
+  def copy
+    originBox = MedicalBox.find(params[:medical_box_id])
+
+    @medicalBox = MedicalBox.create!(
+      name: originBox.name,
+      alert_time: originBox.alert_time,
+      frequency: originBox.frequency,
+      user_id: current_user.id
+    )
+  end
+
   def update
     temp = MedicalBox.find(params[:id])
     temp.update!(

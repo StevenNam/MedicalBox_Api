@@ -1,5 +1,5 @@
 class MedicalBoxesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :create]
+  before_action :authenticate_user!, only: [:index, :show, :create, :copy, :update, :destroy]
 
   def index
     @medicalBoxes = MedicalBox.where(user_id: current_user.id, is_deleted: false).order("id ASC")

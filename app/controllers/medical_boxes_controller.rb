@@ -27,6 +27,16 @@ class MedicalBoxesController < ApplicationController
       frequency: originBox.frequency,
       user_id: current_user.id
     )
+
+    Rails.logger.debug("Length Of Drugs:#{originBox.drugs.size} ")
+    for drug in originBox.drugs
+      Rails.logger.debug("Drug:#{drug.id} ")
+      Drug.create!(
+        name: drug.name,
+        amount: drug.amount,
+        medical_box_id: @medicalBox.id
+      )
+    end
   end
 
   def update

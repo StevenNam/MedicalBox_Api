@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223103345) do
+ActiveRecord::Schema.define(version: 20160304070334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(version: 20160223103345) do
     t.string   "name",                           null: false
     t.integer  "amount",         default: 1,     null: false
     t.boolean  "is_deleted",     default: false, null: false
+    t.integer  "medical_box_id"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.boolean  "is_eaten",       default: false, null: false
     t.integer  "medical_box_id"
     t.datetime "created_at",                     null: false
     t.datetime "updated_at",                     null: false
@@ -64,5 +71,6 @@ ActiveRecord::Schema.define(version: 20160223103345) do
   add_index "users", ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
 
   add_foreign_key "drugs", "medical_boxes"
+  add_foreign_key "histories", "medical_boxes"
   add_foreign_key "medical_boxes", "users"
 end

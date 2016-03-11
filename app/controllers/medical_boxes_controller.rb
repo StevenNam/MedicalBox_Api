@@ -1,5 +1,5 @@
 class MedicalBoxesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show, :create, :copy, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :show, :create, :copy, :update, :history, :destroy]
 
   def index
     @medicalBoxes = MedicalBox.where(user_id: current_user.id, is_deleted: false).order("id ASC")
@@ -14,7 +14,8 @@ class MedicalBoxesController < ApplicationController
       name: params[:name] ||= 'New Medical Box',
       alert_time: params[:alert_time],
       frequency: params[:frequency] ||= 'once',
-      user_id: current_user.id
+      user_id: current_user.id,
+      prompt: 0
     )
   end
 
@@ -25,7 +26,8 @@ class MedicalBoxesController < ApplicationController
       name: originBox.name,
       alert_time: originBox.alert_time,
       frequency: originBox.frequency,
-      user_id: current_user.id
+      user_id: current_user.id,
+      prompt: 0
     )
 
     Rails.logger.debug("Length Of Drugs:#{originBox.drugs.size} ")
@@ -44,7 +46,8 @@ class MedicalBoxesController < ApplicationController
     temp.update!(
       name: params[:name] ||= temp.name,
       alert_time: params[:alert_time] ||= temp.alert_time,
-      frequency: params[:frequency] ||= temp.frequency
+      frequency: params[:frequency] ||= temp.frequency,
+      prompt: params[:prompt] ||= temp.prompt
     )
 
     @medicalBox = MedicalBox.find(params[:id])
@@ -54,6 +57,13 @@ class MedicalBoxesController < ApplicationController
     temp = MedicalBox.find(params[:id])
     temp.update!(
       is_deleted: true
+    )
+  end
+
+  def history
+    temp = MedicalBox.find(params[:medical_box_id])
+    temp.update!(
+      prompt: temp.prompt + 1
     )
   end
 

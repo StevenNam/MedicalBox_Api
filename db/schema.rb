@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160304070334) do
     t.string   "name",       default: "New Medical Box", null: false
     t.string   "alert_time",                             null: false
     t.string   "frequency",  default: "once",            null: false
+    t.integer  "prompt",     default: 0,                 null: false
     t.integer  "user_id"
     t.boolean  "is_deleted", default: false,             null: false
     t.datetime "created_at",                             null: false

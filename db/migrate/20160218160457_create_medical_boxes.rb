@@ -4,6 +4,7 @@ class CreateMedicalBoxes < ActiveRecord::Migration
       t.string :name, null: false, default: 'New Medical Box'
       t.string :alert_time, null: false
       t.string :frequency, null:false, default: 'once'
+      t.integer :prompt, null: false, default: 0
       t.integer :user_id
       t.boolean :is_deleted, null: false, default: false
       t.timestamps null: false
